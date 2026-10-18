@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pakhawaj Taal Practice</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><h1>Pakhawaj Taal Practice</h1><p>Custom cycles of 1–2000 matras · precise Web Audio timing · Space = start/pause</p></header>
+<main>
+<section class="card" id="disp" aria-live="off">
+ <div id="cd">3</div>
+ <div id="cnt">Cycle <span id="cyc">–</span></div>
+ <div class="big" id="num">–</div>
+ <div id="bol">&nbsp;</div>
+ <div><span class="tag" id="cur-tag">Ready</span><span class="tag" id="pos-tag">– / –</span><span class="tag last" id="last-tag" hidden>Last matra → Sam next</span></div>
+ <div id="bar"><i></i></div>
+</section>
+
+<section class="card">
+ <h2>Controls</h2>
+ <div class="row">
+  <button class="pri" id="bStart">▶ Start</button><button id="bPause" disabled>❚❚ Pause</button><button id="bResume" disabled>Resume</button><button id="bStop" disabled>■ Stop</button><button id="bReset">↺ Reset</button>
+ </div>
+ <div class="grid2">
+  <div><label for="bpmN">Tempo (matras / min)</label><input type="number" id="bpmN" min="10" max="600" value="60"></div>
+  <div><label for="kit">Sound</label><select id="kit"><option value="bols">Pakhawaj bols (synthesised)</option><option value="click">Metronome click</option><option value="bell">Bell</option><option value="clap">Clap</option></select></div>
+ </div>
+ <input type="range" id="bpmR" min="10" max="600" value="60" aria-label="Tempo slider">
+ <div class="grid2">
+  <div><label for="vol">Volume</label><input type="range" id="vol" min="0" max="100" value="80"></div>
+  <label class="chk"><input type="checkbox" id="mute"> Mute</label>
+ </div>
+ <label class="chk"><input type="checkbox" id="cdOn" checked> Countdown 3-2-1 before Sam</label>
+ <div id="note"></div>
+</section>
+
+<section class="card wide">
+ <h2>Matras <small style="font-size:13px;color:var(--mut);font-family:Inter">— tap a matra to edit it</small></h2>
+ <div id="grid" role="list"></div>
+</section>
+
+<section class="card">
+ <h2>Taal builder</h2>
+ <label for="name">Taal name</label><input type="text" id="name" maxlength="40">
+ <div class="grid2">
+  <div><label for="n">Total matras (1–2000)</label><input type="number" id="n" min="1" max="2000"></div>
+  <div><label for="vib">Vibhag sizes</label><input type="text" id="vib" placeholder="4,4,4,4"></div>
+ </div>
+ <label for="marks">Vibhag marks (X = Sam, 0 = Khali, 2,3… = Tali)</label><input type="text" id="marks" placeholder="X,2,0,3">
+ <label for="pat">Bol pattern (repeats across all matras; “-” = rest)</label><input type="text" id="pat" placeholder="Dha Dhin Dhin Dha">
+ <div class="row" style="margin-top:8px"><button id="bPat">Apply pattern</button><button id="bAcc">Accent vibhag starts</button></div>
+ <h2 style="margin-top:16px">Selected matra <span id="selL" style="color:var(--tx)"></span></h2>
+ <div class="grid2">
+  <div><label for="mBol">Bol</label><input type="text" id="mBol" maxlength="12"></div>
+  <div><label for="mSnd">Sound</label><select id="mSnd"><option value="auto">Use main sound</option><option value="bols">Bol</option><option value="click">Click</option><option value="bell">Bell</option><option value="clap">Clap</option><option value="silent">Silent</option></select></div>
+ </div>
+ <div class="row"><label class="chk"><input type="checkbox" id="mAcc"> Accent</label><button id="bPrev">♪ Preview</button></div>
+ <p style="font-size:12px;color:var(--mut)">Sam (matra 1) always gets an accent plus a loud resonant TING at every cycle boundary.</p>
+</section>
+
+<section class="card">
+ <h2>Saved taals</h2>
+ <div class="row"><button class="pri" id="bSave">Save</button><button id="bSaveNew">Save as new</button><button id="bNew">New blank</button></div>
+ <div id="presets"></div>
+</section>
+</main>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
